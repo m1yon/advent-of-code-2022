@@ -1,13 +1,6 @@
 with open('input.txt') as f:
-  calorieCounts = []
-  currentCalorieCount = 0
-
-  for line in f:
-    if line == "\n":
-      calorieCounts.append(currentCalorieCount)
-      currentCalorieCount = 0
-    else:
-      currentCalorieCount += int(line)
+  chunks = f.read().split('\n\n')
+  calorieCounts = [sum(tuple(map(int, chunk.split()))) for chunk in chunks]
 
   topThree = (0, 0, 0)
 
