@@ -4,29 +4,24 @@ shape_value = {
     "Z": 3,
 }
 
+shape_to_lose = {"A": "Z", "B": "X", "C": "Y"}
+shape_to_win = {"A": "Y", "B": "Z", "C": "X"}
 
-def calculate_player_score(player, opponent):
-    player_score = 0
-    player_score += shape_value[player]
 
-    if player == chr(ord(opponent) + 23):
-        return player_score + 3
-
-    if (
-        (player == "X" and opponent == "C")
-        or (player == "Y" and opponent == "A")
-        or (player == "Z" and opponent == "B")
-    ):
-        return player_score + 6
-
-    return player_score
+def calculate_player_score(opponent, result):
+    if result == "X":
+        return shape_value[shape_to_lose[opponent]]
+    if result == "Y":
+        return shape_value[chr(ord(opponent) + 23)] + 3
+    if result == "Z":
+        return shape_value[shape_to_win[opponent]] + 6
 
 
 with open("input.txt") as f:
     games = f.read().split("\n")
 
     scores = [
-        calculate_player_score(game.split()[1], game.split()[0]) for game in games
+        calculate_player_score(game.split()[0], game.split()[1]) for game in games
     ]
 
     print(sum(scores))
