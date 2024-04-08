@@ -16,7 +16,7 @@ with open("input.txt") as f:
         start_section_1, end_section_1 = elf_1
         start_section_2, end_section_2 = elf_2
 
-        if start_section_1 <= end_section_2 and end_section_1 >= start_section_2:
+        if max(start_section_1, start_section_2) <= min(end_section_1, end_section_2):
             count += 1
 
     print(count)
