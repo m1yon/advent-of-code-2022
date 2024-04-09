@@ -1,5 +1,5 @@
 with open("input.txt") as f:
-    lines = f.read().split("\n")
+    lines = f.read().rstrip().split("\n")
 
     stack_label_line_index = next(
         (
@@ -38,7 +38,6 @@ with open("input.txt") as f:
         for _ in range(move_amount):
             to_stack.append(from_stack.pop())
 
-    top_of_stacks = [stack[-1] for stack in stacks]
-    result = "".join(top_of_stacks)
+    result = "".join(stack[-1] for stack in stacks)
 
     print(result)
